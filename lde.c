@@ -15,14 +15,14 @@ void imprime(ptLDE *lista){
 
     else{
 
-        ptLDE *aux = lista; //ponteiro auxiliar que percorrerá toda a lista
+        ptLDE *aux = lista; //ponteiro auxiliar que percorrerÃ¡ toda a lista
 
         while(aux != NULL){
 
-            //exibe o número desse nodo
+            //exibe o nÃºmero desse nodo
             printf("%d ", aux->numero);
 
-            //aponta para o próximo nodo
+            //aponta para o prÃ³ximo nodo
             aux = aux->prox;
         }
         printf("\n");
@@ -38,11 +38,11 @@ void imprimeInvertido(ptLDE *lista){
     else{
         ptLDE *aux = lista;
 
-        //Vai até o final da lista
+        //Vai atÃ© o final da lista
         while (aux->prox != NULL)
             aux = aux->prox;
 
-        //Imprime os números do final ao início
+        //Imprime os nÃºmeros do final ao inÃ­cio
         while (aux != NULL){
             printf("%d ", aux->numero);
             aux = aux->ant;
@@ -55,9 +55,9 @@ void imprimeInvertido(ptLDE *lista){
 ptLDE* insereFim(ptLDE *lista, int num){
 
     ptLDE *novo = (ptLDE*) malloc(sizeof(ptLDE)); //aloca novo nodo
-    novo->numero = num; //atribui o número dado ao nodo novo
+    novo->numero = num; //atribui o nÃºmero dado ao nodo novo
 
-    //caso lista vazia insere novo no início
+    //caso lista vazia insere novo no inÃ­cio
     if (lista == NULL){
         lista = novo;
         lista->ant = NULL;
@@ -66,7 +66,7 @@ ptLDE* insereFim(ptLDE *lista, int num){
 
     else{
 
-        ptLDE *aux = lista; //ponteiro auxiliar que percorrerá toda a lista
+        ptLDE *aux = lista; //ponteiro auxiliar que percorrerÃ¡ toda a lista
 
         //percorre toda a lista
         while (aux->prox != NULL)
@@ -86,9 +86,9 @@ ptLDE* insereInicio(ptLDE *lista, int num){
     novo->numero = num;
 
     novo->ant = NULL;
-    novo->prox = lista; //insere o número antes do resto da lista
+    novo->prox = lista; //insere o nÃºmero antes do resto da lista
 
-    //Caso a lista não seja vazia
+    //Caso a lista nÃ£o seja vazia
     if (lista != NULL){
         lista->ant = novo;
     }
@@ -113,7 +113,7 @@ ptLDE* destroi(ptLDE *lista){
 
 void procuraNum(ptLDE *lista, int num){
     ptLDE *aux = lista;
-    int p = 1; //contador da posição
+    int p = 1; //contador da posiÃ§Ã£o
 
     while (aux != NULL){
         if (aux->numero == num){
@@ -124,7 +124,7 @@ void procuraNum(ptLDE *lista, int num){
         aux = aux->prox;
     }
 
-    //Quando o while é todo percorrido, significa que num não está na lista
+    //Quando o while Ã© todo percorrido, significa que num nÃ£o estÃ¡ na lista
     printf("O numero %d nao esta na lista\n", num);
 }
 
@@ -141,7 +141,7 @@ ptLDE* insere(ptLDE *lista, int num){
     ptLDE *novoB = (ptLDE*)malloc(sizeof(ptLDE));
     novoB->numero = num + 1;
 
-    //Caso em que a lista é vazia, recebe o nodo novo
+    //Caso em que a lista Ã© vazia, recebe o nodo novo
     if (lista == NULL){
         novo->ant = NULL;
         novo->prox = NULL;
@@ -172,12 +172,22 @@ ptLDE* insere(ptLDE *lista, int num){
             aux = aux->prox; //incrementa aux
         }
 
-        //caso em que num não está na lista
-        lista->prox->ant = NULL;
-        lista = lista->prox; //remove o primeiro elemento
+        //caso em que num nÃ£o estÃ¡ na lista
+        //Caso em que hÃ¡ apenas 2 elementos na lista
+        if(lista->prox == ant)
+            lista = NULL;
 
-        ant->ant->prox = NULL;
-        ant = ant->ant;//remove o último elemento da lista
+        //Caso em que hÃ¡ sÃ³ um elemento retorna a lista inalterada
+        else if(lista->prox == NULL)
+            return lista;
+
+        else{
+            lista->prox->ant = NULL;
+            lista = lista->prox; //remove o primeiro elemento
+
+            ant->ant->prox = NULL;
+            ant = ant->ant;//remove o Ãºltimo elemento da lista
+        }
     }
     return lista;
 }
